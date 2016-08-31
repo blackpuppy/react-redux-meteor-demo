@@ -10,11 +10,9 @@ const Task = (props) => {
     e.preventDefault();
     removeTask(taskId);
   }
-  const handleToggleChecked = (taskId, e) => {
+  const handleToggleChecked = (taskId, checked, e) => {
     e.preventDefault();
-    console.debug('handleToggleChecked(): e.target.value = ', e.target.value);
-    console.debug('  set to ', e.target.value === 'on');
-    toggleChecked(taskId, e.target.value === 'on');
+    toggleChecked(taskId, !checked);
   }
   const {_id, text, checked} = props.task;
 
@@ -24,10 +22,9 @@ const Task = (props) => {
     <li>
       <Checkbox inline
         checked={checked}
-        onChange={handleToggleChecked.bind(this, _id)}
-      />
-
-      {text}
+        onChange={handleToggleChecked.bind(this, _id, checked)}>
+        {text}
+      </Checkbox>
 
       <Button bsStyle="danger" style={{float: "right"}}
         onClick={handleRemoveTask.bind(this, _id)}> Remove Task </Button>
