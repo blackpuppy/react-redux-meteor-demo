@@ -30,3 +30,11 @@ export const removeTask = (taskId) => {
     });
   }
 }
+
+export const toggleChecked = (taskId, checked) => {
+  return (dispatch, getState, { Meteor }) => {
+    Meteor.call("setChecked", taskId, checked, (err, res) => {
+      if (err) return console.error(err)
+    });
+  }
+}

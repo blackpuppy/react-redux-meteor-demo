@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Task from '../components/task';
-import { removeTask } from  '../actions';
+import { removeTask, toggleChecked } from  '../actions';
 
 const mapState = () => ({});
 const mapDispatch = (dispatch, getState) => {
   return {
-    removeTask: (taskId) => dispatch(removeTask(taskId))
+    removeTask: (taskId) => dispatch(removeTask(taskId)),
+    toggleChecked: (taskId, checked) => dispatch(toggleChecked(taskId, checked))
   }
 };
 

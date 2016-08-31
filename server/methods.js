@@ -14,7 +14,8 @@ export default function () {
   })
   Meteor.methods({
     'setChecked': (taskId, checked) => {
-      const todo = Todos.findOne(taskId);
+      // const todo = Todos.findOne(taskId);
+      // console.debug('Meteor method setChecked: todo = ', todo);
       Todos.update(taskId, { $set: { checked: checked } });
     }
   })
