@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Button,
+  Checkbox
 } from 'react-bootstrap';
 
 const Task = (props) => {
@@ -21,9 +22,8 @@ const Task = (props) => {
 
   return (
     <li>
-      <input
-        type="checkbox"
-        defaultChecked={checked}
+      <Checkbox inline
+        checked={checked}
         onChange={handleToggleChecked.bind(this, _id)}
       />
 
