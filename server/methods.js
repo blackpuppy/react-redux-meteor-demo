@@ -12,4 +12,10 @@ export default function () {
       Todos.remove({_id: taskId})
     }
   })
+  Meteor.methods({
+    'setChecked': (taskId, checked) => {
+      const todo = Todos.findOne(taskId);
+      Todos.update(taskId, { $set: { checked: checked } });
+    }
+  })
 }
