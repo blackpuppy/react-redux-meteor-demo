@@ -7,7 +7,7 @@ export const subscribe = () => {
       if (subs.ready()) {
         dispatch({
           type: types.UPDATE_TASK,
-          tasks: Collections.Todos.find().fetch(),
+          tasks: Collections.Todos.find({},{sort: {priority: -1, timestamp: -1}}).fetch(),
         })
       }
     })
