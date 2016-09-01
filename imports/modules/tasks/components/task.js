@@ -19,19 +19,19 @@ const Task = (props) => {
 
   let priorityStyle = '';
   switch (priority) {
-  case 5:
+  case '5':
     priorityStyle = 'danger';
     break;
-  case 3:
+  case '3':
   default:
     priorityStyle = 'success';
     break;
-  case 1:
+  case '1':
     priorityStyle = 'info';
     break;
   }
 
-  // console.debug('Task Component: priority = ', priority, ', priorityStyle = ', priorityStyle);
+  console.debug('Task Component: priority = ', priority, ', priorityStyle = ', priorityStyle);
 
   return (
     <ListGroupItem bsStyle={priorityStyle}>
