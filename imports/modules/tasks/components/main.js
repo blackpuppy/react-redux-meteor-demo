@@ -41,12 +41,14 @@ const App = class extends Component {
         </header>
         <FormGroup>
           <InputGroup>
+            <InputGroup.Addon>
+              <select ref="priortyInput">
+                <option value="high">High</option>
+                <option value="normal" selected>Normal</option>
+                <option value="low">Low</option>
+              </select>
+            </InputGroup.Addon>
             <FormControl type="text" ref="taskInput"/>
-            <FormControl componentClass="select" placeholder="Priorty" ref="priortyInput">
-              <option value="high">High</option>
-              <option value="normal" selected>Normal</option>
-              <option value="low">Low</option>
-            </FormControl>
             <InputGroup.Button>
               <Button bsStyle="info" onClick={handleAddTask.bind(this)}> Add Task </Button>
             </InputGroup.Button>
