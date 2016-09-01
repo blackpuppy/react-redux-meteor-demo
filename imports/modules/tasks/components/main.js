@@ -27,7 +27,7 @@ const App = class extends Component {
 
       // reset form
       text.value = null;
-      priority.value = 'normal';
+      // priority.value = 'normal';
     }
     const renderTasks = () => {
       return (tasks||[]).map((task) => (
