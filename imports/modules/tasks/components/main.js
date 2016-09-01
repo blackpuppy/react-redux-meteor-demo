@@ -14,11 +14,19 @@ const App = class extends Component {
     const { tasks, addTask } = this.props
     const handleAddTask = (e) => {
       e.preventDefault();
+
       // Have to use findDOMNode with react-bootstrap
-      const node = findDOMNode(this.refs.taskInput);
-      const task = {text: node.value};
+      const text = findDOMNode(this.refs.taskInput);
+      const priority = findDOMNode(this.refs.priortyInput);
+      const task = {
+        text: text.value,
+        priority: priority.value
+      };
       addTask(task);
-      node.value = null;
+
+      // reset form
+      text.value = null;
+      priority.value = 'normal';
     }
     const renderTasks = () => {
       return (tasks||[]).map((task) => (
@@ -29,11 +37,16 @@ const App = class extends Component {
     return (
       <div className="container">
         <header>
-          <h1>Todo List ({(tasks ||[] ).length})</h1>
+          <h1>Todo List ({(tasks || []).length})</h1>
         </header>
         <FormGroup>
           <InputGroup>
             <FormControl type="text" ref="taskInput"/>
+            <FormControl componentClass="select" placeholder="Priorty" ref="priortyInput">
+              <option value="high">High</option>
+              <option value="normal" selected>Normal</option>
+              <option value="low">Low</option>
+            </FormControl>
             <InputGroup.Button>
               <Button bsStyle="info" onClick={handleAddTask.bind(this)}> Add Task </Button>
             </InputGroup.Button>
