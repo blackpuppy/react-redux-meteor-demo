@@ -43,9 +43,9 @@ const App = class extends Component {
           <InputGroup>
             <InputGroup.Addon>
               <select ref="priortyInput">
-                <option value="high">High</option>
-                <option value="normal" selected>Normal</option>
-                <option value="low">Low</option>
+                <option value="5">High</option>
+                <option value="3" selected>Normal</option>
+                <option value="1">Low</option>
               </select>
             </InputGroup.Addon>
             <FormControl type="text" ref="taskInput"/>
