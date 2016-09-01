@@ -5,7 +5,8 @@ import {
   ButtonToolbar,
   FormGroup,
   InputGroup,
-  FormControl
+  FormControl,
+  ListGroup
 } from 'react-bootstrap';
 import Task from '../containers/task';
 
@@ -54,9 +55,9 @@ const App = class extends Component {
             </InputGroup.Button>
           </InputGroup>
         </FormGroup>
-        <ul>
+        <ListGroup>
           {renderTasks()}
-        </ul>
+        </ListGroup>
       </div>
     );
   }

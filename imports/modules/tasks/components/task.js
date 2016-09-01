@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Button,
-  Checkbox
+  Checkbox,
+  ListGroupItem
 } from 'react-bootstrap';
 
 const Task = (props) => {
@@ -14,12 +15,26 @@ const Task = (props) => {
     e.preventDefault();
     toggleChecked(taskId, !checked);
   }
-  const {_id, text, checked} = props.task;
+  const {_id, text, checked, priority} = props.task;
 
-  console.debug('Task Component: checked = ', checked);
+  let priorityStyle = '';
+  switch (priority) {
+  case 5:
+    priorityStyle = 'danger';
+    break;
+  case 3:
+  default:
+    priorityStyle = 'success';
+    break;
+  case 1:
+    priorityStyle = 'info';
+    break;
+  }
+
+  // console.debug('Task Component: priority = ', priority, ', priorityStyle = ', priorityStyle);
 
   return (
-    <li>
+    <ListGroupItem bsStyle={priorityStyle}>
       <Checkbox inline
         checked={checked}
         onChange={handleToggleChecked.bind(this, _id, checked)}>
@@ -28,7 +43,7 @@ const Task = (props) => {
 
       <Button bsStyle="danger" style={{float: "right"}}
         onClick={handleRemoveTask.bind(this, _id)}> Remove Task </Button>
-    </li>
+    </ListGroupItem>
   );
 }
 
