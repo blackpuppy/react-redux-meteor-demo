@@ -31,7 +31,7 @@ const Task = (props) => {
     break;
   }
 
-  console.debug('Task Component: priority = ', priority, ', priorityStyle = ', priorityStyle);
+  // console.debug('Task Component: priority = ', priority, ', priorityStyle = ', priorityStyle);
 
   return (
     <ListGroupItem bsStyle={priorityStyle}>

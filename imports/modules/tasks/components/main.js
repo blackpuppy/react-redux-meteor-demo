@@ -8,6 +8,7 @@ import {
   FormControl,
   ListGroup
 } from 'react-bootstrap';
+import TaskForm from '../containers/task-form';
 import Task from '../containers/task';
 
 const App = class extends Component {
@@ -40,21 +41,7 @@ const App = class extends Component {
         <header>
           <h1>Todo List ({(tasks || []).length})</h1>
         </header>
-        <FormGroup>
-          <InputGroup>
-            <InputGroup.Addon>
-              <select ref="priortyInput">
-                <option value="5">High</option>
-                <option value="3" selected>Normal</option>
-                <option value="1">Low</option>
-              </select>
-            </InputGroup.Addon>
-            <FormControl type="text" ref="taskInput"/>
-            <InputGroup.Button>
-              <Button bsStyle="info" onClick={handleAddTask.bind(this)}> Add Task </Button>
-            </InputGroup.Button>
-          </InputGroup>
-        </FormGroup>
+        <TaskForm />
         <ListGroup>
           {renderTasks()}
         </ListGroup>
