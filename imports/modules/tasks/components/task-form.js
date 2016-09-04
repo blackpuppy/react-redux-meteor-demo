@@ -8,19 +8,30 @@ import {
   FormControl,
   ListGroup
 } from 'react-bootstrap';
-import { Field, Form, actions } from 'react-redux-form';
+import {
+  Field,
+  Form,
+  actions,
+  createFieldClass,
+  controls
+} from 'react-redux-form';
+import initialState from '../reducers/initialState';
 
 const TaskForm = class extends Component {
   render() {
-    const { task, textChanged, priorityChanged, addTask } = this.props
+    // console.debug('TaskForm.render():');
+
+    const { task, textChanged, priorityChanged, resetTask, addTask } = this.props
+
+    // console.debug('  task = ', task);
 
     const handleTextChanged = (e) => {
-      console.debug('TaskForm.render(): handleTextChanged(): e.target.value = ', e.target.value);
+      // console.debug('handleTextChanged(): e.target.value = ', e.target.value);
       textChanged(e.target.value);
     }
 
     const handlePriorityChanged = (e) => {
-      console.debug('handlePriorityChanged(): e.target.value = ', e.target.value);
+      // console.debug('handlePriorityChanged(): e.target.value = ', e.target.value);
       priorityChanged(e.target.value);
     }
 
@@ -28,8 +39,10 @@ const TaskForm = class extends Component {
       console.debug('TaskForm.handleAddTask(): task = ', task);
       // e.preventDefault();
 
+      const initialTaskState = initialState.task;
+
       // Have to use findDOMNode with react-bootstrap
-      const text = findDOMNode(this.refs.taskInput);
+      const text = findDOMNode(this.refs.textInput);
       // const priority = findDOMNode(this.refs.priortyInput);
 
       // const task = {
@@ -39,25 +52,46 @@ const TaskForm = class extends Component {
       addTask(task);
 
       // reset form
-      text.value = null;
+      resetTask();
+
+      text.value = '';
+      textChanged('');
+
+      console.debug('  after resetTask(): task = ', task);
+      console.debug('  this.props.task = ', this.props.task);
       // priority.value = 'normal';
     }
 
+    // problem: lose focus every time onChange is triggered
+    // const BSField = createFieldClass({
+    //   'FormControl': controls.text
+    // }, {
+    //   componentMap: {
+    //     FormControl: FormControl
+    //   }
+    // });
+
+            //<BSField model="task.text">
+            //  <FormControl componentClass="input" type="text" ref="textInput"
+            //   onChange={handleTextChanged} />
+            //</BSField>
+
     return (
-      <Form model="task" onSubmit={(task) => handleAddTask(task)}>
+      <Form model="task" onSubmit={handleAddTask}>
         <FormGroup>
           <InputGroup>
-            <Field model="task.priority">
-              <InputGroup.Addon>
+            <InputGroup.Addon>
+              <Field model="task.priority">
                 <select ref="priortyInput" onChange={handlePriorityChanged}>
                   <option value="5">High</option>
-                  <option value="3" selected>Normal</option>
+                  <option value="3">Normal</option>
                   <option value="1">Low</option>
                 </select>
-              </InputGroup.Addon>
-            </Field>
+              </Field>
+            </InputGroup.Addon>
             <Field model="task.text">
-              <FormControl componentClass="input" type="text" ref="taskInput" onChange={handleTextChanged} />
+              <input type="text" className="form-control" ref="textInput"
+                onChange={handleTextChanged} />
             </Field>
             <InputGroup.Button>
               <Button type="submit" bsStyle="info">Add Task</Button>
