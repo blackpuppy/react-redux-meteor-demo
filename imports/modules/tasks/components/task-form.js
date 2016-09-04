@@ -12,7 +12,18 @@ import { Field, Form, actions } from 'react-redux-form';
 
 const TaskForm = class extends Component {
   render() {
-    const { addTask } = this.props
+    const { task, textChanged, priorityChanged, addTask } = this.props
+
+    const handleTextChanged = (e) => {
+      console.debug('TaskForm.render(): handleTextChanged(): e.target.value = ', e.target.value);
+      textChanged(e.target.value);
+    }
+
+    const handlePriorityChanged = (e) => {
+      console.debug('handlePriorityChanged(): e.target.value = ', e.target.value);
+      priorityChanged(e.target.value);
+    }
+
     const handleAddTask = (task) => {
       console.debug('TaskForm.handleAddTask(): task = ', task);
       // e.preventDefault();
@@ -38,7 +49,7 @@ const TaskForm = class extends Component {
           <InputGroup>
             <Field model="task.priority">
               <InputGroup.Addon>
-                <select ref="priortyInput">
+                <select ref="priortyInput" onChange={handlePriorityChanged}>
                   <option value="5">High</option>
                   <option value="3" selected>Normal</option>
                   <option value="1">Low</option>
@@ -46,7 +57,7 @@ const TaskForm = class extends Component {
               </InputGroup.Addon>
             </Field>
             <Field model="task.text">
-              <FormControl type="text" ref="taskInput"/>
+              <FormControl componentClass="input" type="text" ref="taskInput" onChange={handleTextChanged} />
             </Field>
             <InputGroup.Button>
               <Button type="submit" bsStyle="info">Add Task</Button>
