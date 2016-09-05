@@ -45,10 +45,6 @@ const TaskForm = class extends Component {
       const text = findDOMNode(this.refs.textInput);
       // const priority = findDOMNode(this.refs.priortyInput);
 
-      // const task = {
-      //   text: text.value,
-      //   priority: priority.value
-      // };
       addTask(task);
 
       // reset form
@@ -62,7 +58,7 @@ const TaskForm = class extends Component {
       // priority.value = 'normal';
     }
 
-    // problem: lose focus every time onChange is triggered
+    // problem with custom component: lose focus every time onChange is triggered
     // const BSField = createFieldClass({
     //   'FormControl': controls.text
     // }, {
