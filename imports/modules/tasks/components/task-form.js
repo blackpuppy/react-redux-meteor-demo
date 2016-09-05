@@ -85,7 +85,12 @@ const TaskForm = class extends Component {
                 </select>
               </Field>
             </InputGroup.Addon>
-            <Field model="task.text">
+            <Field model="task.text"
+                validators={{
+                  required: (val) => val && val.length,
+                  minLengh: (val) => val.length >= 5
+                }}
+                validateOn="blur">
               <input type="text" className="form-control" ref="textInput"
                 onChange={handleTextChanged} />
             </Field>
