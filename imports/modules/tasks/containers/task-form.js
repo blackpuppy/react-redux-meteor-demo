@@ -1,29 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
 
 import initialState from '../reducers/initialState';
 import TaskForm from '../components/task-form';
-import { addTask } from  '../actions';
+import {
+  addTask,
+  changeTaskText,
+  changeTaskPriority,
+  resetTask
+} from  '../actions';
 
 const mapState = (state) => ({task: state.task});
 const mapDispatch = (dispatch, getState) => {
   return {
-    textChanged: (text) => actions.change('task.text', text),
-    priorityChanged: (priority) => actions.change('task.priority', priority),
-    resetTask: () => {
-      // const initialTaskState = initialState.task;
-      // actions.change('task.text', initialTaskState.text);
-
-      // console.debug('resetTask(): initialTaskState.text = ', initialTaskState.text);
-
-      // const newTask = Object.assign({}, task);
-      // newTask.text = initialTaskState.text;
-      // console.debug('  return newTask = ', newTask);
-      // return newTask;
-
-      actions.reset('task.text');
-    },
+    textChanged: (text) => dispatch(changeTaskText( text)),
+    priorityChanged: (priority) => dispatch(changeTaskPriority(priority)),
+    resetTask: () => dispatch(resetTask()),
     addTask: (task) => dispatch(addTask(task))
   }
 };

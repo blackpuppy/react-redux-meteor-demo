@@ -1,3 +1,4 @@
+import { actions } from 'react-redux-form';
 import * as types from '../constants/tasks';
 
 export const subscribe = () => {
@@ -36,5 +37,20 @@ export const toggleChecked = (taskId, checked) => {
     Meteor.call("setChecked", taskId, checked, (err, res) => {
       if (err) return console.error(err)
     });
+  }
+}
+
+export const changeTaskText = (text) => {
+  return (dispatch) => actions.change('task.text', text);
+}
+
+export const changeTaskPriority = (priority) => {
+  return (dispatch) => actions.change('task.priority', priority);
+}
+
+export const resetTask = () => {
+  return (dispatch) => {
+    actions.reset('task.text');
+    // actions.change('task.text', '');
   }
 }

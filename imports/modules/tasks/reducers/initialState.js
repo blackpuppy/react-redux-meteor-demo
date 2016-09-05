@@ -1,6 +1,6 @@
 export default {
   task: {
-    text: 'default task',
+    text: '',
     priority: '3',
     checked: false
   }

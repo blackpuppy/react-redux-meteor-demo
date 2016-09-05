@@ -22,6 +22,7 @@ const TaskForm = class extends Component {
     // console.debug('TaskForm.render():');
 
     const { task, textChanged, priorityChanged, resetTask, addTask } = this.props
+    // let { taskForm: { fields } } = this.props
 
     // console.debug('  task = ', task);
 
@@ -49,13 +50,11 @@ const TaskForm = class extends Component {
 
       // reset form
       resetTask();
-
       text.value = '';
       textChanged('');
-
-      console.debug('  after resetTask(): task = ', task);
-      console.debug('  this.props.task = ', this.props.task);
       // priority.value = 'normal';
+
+      console.debug('  after resetTask(): this.props.task = ', this.props.task);
     }
 
     // problem with custom component: lose focus every time onChange is triggered
@@ -66,15 +65,24 @@ const TaskForm = class extends Component {
     //     FormControl: FormControl
     //   }
     // });
+    /*
+            <BSField model="task.text"
+                validators={{
+                  required: (val) => val && val.length,
+                  minLengh: (val) => val.length >= 5
+                }}
+                validateOn="blur">
+              <FormControl type="text" ref="textInput" onChange={handleTextChanged} />
+              <FormControl.Feedback />
+            </BSField>
 
-            //<BSField model="task.text">
-            //  <FormControl componentClass="input" type="text" ref="textInput"
-            //   onChange={handleTextChanged} />
-            //</BSField>
+            validationState={taskForm.fields.text.valid ? "success" : "error"}
+    */
 
     return (
       <Form model="task" onSubmit={handleAddTask}>
-        <FormGroup>
+        <FormGroup controlId="newTaskForm"
+            >
           <InputGroup>
             <InputGroup.Addon>
               <Field model="task.priority">
