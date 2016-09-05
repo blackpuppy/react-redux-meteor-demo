@@ -51,6 +51,5 @@ export const changeTaskPriority = (priority) => {
 export const resetTask = () => {
   return (dispatch) => {
     actions.reset('task.text');
-    // actions.change('task.text', '');
   }
 }

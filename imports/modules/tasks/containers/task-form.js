@@ -10,7 +10,7 @@ import {
   resetTask
 } from  '../actions';
 
-const mapState = (state) => ({task: state.task});
+const mapState = (state) => ({task: state.task, taskForm: state.taskForm});
 const mapDispatch = (dispatch, getState) => {
   return {
     textChanged: (text) => dispatch(changeTaskText( text)),

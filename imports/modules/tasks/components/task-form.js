@@ -21,7 +21,7 @@ const TaskForm = class extends Component {
   render() {
     // console.debug('TaskForm.render():');
 
-    const { task, textChanged, priorityChanged, resetTask, addTask } = this.props
+    const { task, taskForm, textChanged, priorityChanged, resetTask, addTask } = this.props
     // let { taskForm: { fields } } = this.props
 
     // console.debug('  task = ', task);
@@ -51,7 +51,7 @@ const TaskForm = class extends Component {
       // reset form
       resetTask();
       text.value = '';
-      textChanged('');
+      // textChanged('');
       // priority.value = 'normal';
 
       console.debug('  after resetTask(): this.props.task = ', this.props.task);
@@ -82,7 +82,7 @@ const TaskForm = class extends Component {
     return (
       <Form model="task" onSubmit={handleAddTask}>
         <FormGroup controlId="newTaskForm"
-            >
+            validationState={taskForm.fields.text.valid ? "success" : "error"}>
           <InputGroup>
             <InputGroup.Addon>
               <Field model="task.priority">
@@ -98,12 +98,14 @@ const TaskForm = class extends Component {
                   required: (val) => val && val.length,
                   minLengh: (val) => val.length >= 5
                 }}
-                validateOn="blur">
+                validateOn="change">
               <input type="text" className="form-control" ref="textInput"
+                placeholder="task description"
                 onChange={handleTextChanged} />
             </Field>
             <InputGroup.Button>
-              <Button type="submit" bsStyle="info">Add Task</Button>
+              <Button type="submit" bsStyle="info"
+                disabled={!taskForm.fields.text.valid}>Add Task</Button>
             </InputGroup.Button>
           </InputGroup>
         </FormGroup>
