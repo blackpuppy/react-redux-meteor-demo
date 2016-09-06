@@ -15,7 +15,7 @@ const mapDispatch = (dispatch, getState) => {
   return {
     textChanged: (text) => dispatch(changeTaskText( text)),
     priorityChanged: (priority) => dispatch(changeTaskPriority(priority)),
-    resetTask: () => dispatch(resetTask()),
+    resetTaskForm: () => dispatch(resetTask()),
     addTask: (task) => dispatch(addTask(task))
   }
 };

@@ -21,10 +21,17 @@ const TaskForm = class extends Component {
   render() {
     // console.debug('TaskForm.render():');
 
-    const { task, taskForm, textChanged, priorityChanged, resetTask, addTask } = this.props
-    // let { taskForm: { fields } } = this.props
+    const {
+      task,
+      taskForm,
+      textChanged,
+      priorityChanged,
+      resetTaskForm,
+      addTask
+    } = this.props;
 
     // console.debug('  task = ', task);
+    // console.debug('  resetTaskForm = ', resetTaskForm);
 
     const handleTextChanged = (e) => {
       // console.debug('handleTextChanged(): e.target.value = ', e.target.value);
@@ -49,8 +56,8 @@ const TaskForm = class extends Component {
       addTask(task);
 
       // reset form
-      resetTask();
-      text.value = '';
+      resetTaskForm();
+      // text.value = '';
       // textChanged('');
       // priority.value = 'normal';
 
