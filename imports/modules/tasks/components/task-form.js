@@ -79,7 +79,8 @@ const TaskForm = class extends Component {
                   minLengh: (val) => val.length >= 5
                 }}
                 validateOn="blur">
-              <FormControl type="text" ref="textInput" onChange={handleTextChanged} />
+              <FormControl type="text" ref="textInput"
+                placeholder="task description" onChange={handleTextChanged} />
               <FormControl.Feedback />
             </BSField>
 
