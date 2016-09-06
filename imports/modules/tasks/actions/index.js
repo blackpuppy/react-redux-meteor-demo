@@ -8,7 +8,10 @@ export const subscribe = () => {
       if (subs.ready()) {
         dispatch({
           type: types.UPDATE_TASK,
-          tasks: Collections.Todos.find({},{sort: {priority: -1, timestamp: -1}}).fetch(),
+          tasks: Collections.Todos.find(
+            {},
+            {sort: {priority: -1, timestamp: -1}}
+          ).fetch()
         })
       }
     })
@@ -20,6 +23,7 @@ export const addTask = (task) => {
   return (dispatch, getState, { Meteor }) => {
     Meteor.call("addTask", task, (err, res) => {
       if (err) return console.error(err)
+      resetTask();
     });
   }
 }
@@ -49,7 +53,5 @@ export const changeTaskPriority = (priority) => {
 }
 
 export const resetTask = () => {
-  return (dispatch) => {
-    actions.reset('task.text');
-  }
+  return (dispatch) => actions.reset('task.text');
 }

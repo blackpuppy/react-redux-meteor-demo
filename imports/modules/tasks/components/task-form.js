@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import {
   Button,
@@ -113,5 +113,10 @@ const TaskForm = class extends Component {
     );
   }
 }
+
+TaskForm.propTypes = {
+  task: PropTypes.object.isRequired,
+  taskForm: PropTypes.object.isRequired
+};
 
 export default TaskForm
