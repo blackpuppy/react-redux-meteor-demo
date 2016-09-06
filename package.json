@@ -13,5 +13,11 @@
     "react-redux-form": "^0.14.5",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.11.0"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 9001"
   }
 }
