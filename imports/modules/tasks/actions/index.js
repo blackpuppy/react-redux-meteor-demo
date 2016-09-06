@@ -23,7 +23,6 @@ export const addTask = (task) => {
   return (dispatch, getState, { Meteor }) => {
     Meteor.call("addTask", task, (err, res) => {
       if (err) return console.error(err)
-      resetTask();
     });
   }
 }
@@ -53,5 +52,8 @@ export const changeTaskPriority = (priority) => {
 }
 
 export const resetTask = () => {
-  return (dispatch) => actions.reset('task.text');
+  return (dispatch) => {
+    console.debug('dispatch resetTask(): to call actions.reset');
+    return actions.reset('task.text');
+  }
 }

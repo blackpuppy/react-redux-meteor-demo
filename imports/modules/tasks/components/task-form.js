@@ -35,6 +35,7 @@ const TaskForm = class extends Component {
 
     const handleTextChanged = (e) => {
       // console.debug('handleTextChanged(): e.target.value = ', e.target.value);
+      // e.preventDefault();
       textChanged(e.target.value);
     }
 
@@ -43,8 +44,9 @@ const TaskForm = class extends Component {
       priorityChanged(e.target.value);
     }
 
-    const handleAddTask = (task) => {
-      console.debug('TaskForm.handleAddTask(): task = ', task);
+    const handleAddTask = (task, e) => {
+      console.debug('TaskForm.handleAddTask(): task = ', task, ', e = ', e);
+
       // e.preventDefault();
 
       const initialTaskState = initialState.task;
