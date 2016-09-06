@@ -111,7 +111,8 @@ const TaskForm = class extends Component {
                 onChange={handleTextChanged} />
             </Field>
             <InputGroup.Button>
-              <Button type="submit" bsStyle="info"
+              <Button type="submit"
+                bsStyle={taskForm.fields.text.valid ? 'primary' : 'danger'}
                 disabled={!taskForm.fields.text.valid}>Add Task</Button>
             </InputGroup.Button>
           </InputGroup>
