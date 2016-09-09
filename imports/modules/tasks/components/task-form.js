@@ -19,7 +19,8 @@ import initialState from '../reducers/initialState';
 
 const TaskForm = class extends Component {
   render() {
-    // console.debug('TaskForm.render():');
+    console.debug('TaskForm.render():');
+    console.debug('  this.props = ', this.props);
 
     const {
       task,

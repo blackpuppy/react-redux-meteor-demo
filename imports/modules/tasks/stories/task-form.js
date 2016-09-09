@@ -1,7 +1,23 @@
 import React from 'react';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import { storiesOf, action } from '@kadira/storybook';
 
+import reducerTasks from '../reducers';
 import TaskForm from '../components/task-form';
+import initialState from '../reducers/initialState';
+
+// is store necessary?
+const store = createStore(
+  combineReducers({
+    ...reducerTasks,
+  }),
+  compose(
+    applyMiddleware(thunk.withExtraArgument({})),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+)
 
 storiesOf('TaskForm', module)
   .add('first task form', () => {
@@ -11,18 +27,27 @@ storiesOf('TaskForm', module)
       priority: '5',
       checked: false
     };
+    const taskForm = {
+      fields: {
+        text: {
+          valid: true
+        }
+      }
+    };
     const props = {
       key: task._id,
       task: task,
-      taskForm: {}, // TODO: how to create taskForm?
-      textChanged: () => action('textChanged'),
-      priorityChanged: () => action('priorityChanged'),
-      resetTaskForm: () => action('resetTaskForm'),
-      addTask: () => action('addTask')
+      taskForm: taskForm,
+      textChanged: (text) => console.debug('textChanged(): text = ', text),
+      priorityChanged: (priority) => console.debug('priorityChanged(): priority = ', priority),
+      resetTaskForm: () => console.debug('resetTaskForm()'),
+      addTask: (task) => console.debug('addTask(): task = ', task)
     };
     return (
-      <TaskForm
-        {...props}
-      />
+      <Provider store={store}>
+        <TaskForm
+          {...props}
+        />
+      </Provider>
     );
   });
