@@ -14,8 +14,11 @@ storiesOf('Task', module)
     const props = {
       key: task._id,
       task: task,
-      removeTask: () => action('removeTask'),
-      toggleChecked: () => action('toggleChecked')
+      removeTask: (taskId) => console.debug('removeTask(): taskId = ', taskId),
+      toggleChecked: (taskId, checked) => console.debug(
+        'toggleChecked(): taskId = ', taskId,
+        ', checked = ', checked
+      )
     };
     return (
       <Task
